@@ -41,12 +41,12 @@ Copy the `AUTOBOOT.HFE` file to the root folder on the SD card.
 Insert the SD card in the Floppy Emulator and power on the system.
 Select `AUTOBOOT.HFE` and let the system boot on it.
 
-![](pics/HxC01.png)
+![](pics/HxC01.PNG)
 
 A welcome screen appears. Press any key to show the slot selector.
 At first, the list of slots appears empty. 
 
-![](pics/HxC02.png)
+![](pics/HxC02.PNG)
 
 We'll first select a system disk image for drive A: (or :0). Let's
 press the `A` key. We get a choice of options:
@@ -54,7 +54,7 @@ press the `A` key. We get a choice of options:
 - `D`: delete the entry from the list;
 - `C`: change slot (return to the main selection menu).
 
-![](pics/HxC03.png)
+![](pics/HxC03.PNG)
 
 We press the S key to select an image. We get a file selector, which
 allows us to browse the available .HFE files and folders on the
@@ -71,13 +71,13 @@ choice of options:
 - `ENTER`: Select the file image for the selected drive (A: or B:)
   in the current slot.
 
-![](pics/HxC04.png)
+![](pics/HxC04.PNG)
 
 Let's select a bootable disk image and press `ENTER`. The name of the 
 selected disk image is shown in the list of slots under the column
 `Drive A`.
 
-![](pics/HxC05.png)
+![](pics/HxC05.PNG)
 
 If the Floppy Emulator is installed in the system to emulate two
 floppy drives, we can select another disk image to use as drive B:
@@ -85,14 +85,14 @@ floppy drives, we can select another disk image to use as drive B:
 key `B` instead of `A`. We'll see the name of another disk image under
 the column `Drive B`.
 
-![](pics/HxC06.png)
+![](pics/HxC06.PNG)
 
 We can now boot the system on the selected slot. If we press ENTER,
 the first time we'll see `Enter=REBOOT` in the help line at the
 bottom of the screen. If we press `ENTER` again, the system will
 boot using the drive(s) in the selected slot.
 
-![](pics/HxC07.png)
+![](pics/HxC07.PNG)
 
 If we power off the TRS-80, then power it on again, the system will
 reboot on the `AUTOBOOT.HFE`, showing the slots selector, with the
