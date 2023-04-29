@@ -31,6 +31,8 @@ slot referencing one or two disk images for drives A: and B:
 
 Currently, this tool can be run on TRS-80 models 4/4D and 4p.
 
+_A pre-release version (v0.1.2-alpha) can be found in the Releases section._
+
 
 Usage
 -----
