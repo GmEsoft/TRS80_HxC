@@ -37,6 +37,50 @@ _A pre-release version (v0.1.2-alpha) can be found in the Releases section._
 Usage
 -----
 
+### Preparation
+
+The SD Card must be formatted in FAT32/LBA. The partition type must be `0C`.
+
+This can be checked with the Windows tool `DISKPART`:
+```
+DISKPART> list vol
+
+  Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
+  ----------  ---  -----------  -----  ----------  -------  ---------  --------
+  Volume 0     E                       DVD-ROM         0 B  No Media
+  Volume 1     C   BOOT         NTFS   Partition     56 GB  Healthy    System
+  Volume 2     I   USBSANDISK2  exFAT  Removable    232 GB  Healthy
+* Volume 3     G                FAT32  Removable     14 GB  Healthy
+  Volume 4     H   USB DISK     FAT32  Removable    115 GB  Healthy
+
+DISKPART> select vol 3
+
+Volume 3 is the selected volume.
+
+DISKPART> detail part
+
+Partition 1
+Type  : 0C
+Hidden: No
+Active: No
+Offset in Bytes: 4194304
+
+  Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
+  ----------  ---  -----------  -----  ----------  -------  ---------  --------
+* Volume 3     G                FAT32  Removable     14 GB  Healthy
+
+DISKPART>
+```
+
+An HxC config file must also be present in the root folder of the SD card. This
+can be created under Windows with the tool `HxCFloppyEmulator.exe`. If the Floppy
+Emulator is installed to emulate 2 drives, check "2 drives emulation".
+
+Save the config file to the root folder of your SD card as `HXCSDFE.CFG`.
+
+![](pics/HXCSDFE.PNG)
+
+
 ### Bootable version
 
 Copy the `AUTOBOOT.HFE` file to the root folder on the SD card.
