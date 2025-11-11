@@ -4,12 +4,11 @@
 
 *MOD
 
-BRK	DEFL	0		;Enable Breakpoints
-TRC	DEFL	0		;trace
-
 ;++++++++++++++++++++++++++++++++++++++++++++++++
 	IFEQ	$SEG,$CODE	; CODE segment
 
+	IF	0		; XCHSORT not used...
+	
 ;-----	Sort files - Simple Exchange Sort Algorithm
 ;	Original version, slow: up to N*(N-1)/2 swaps
 ;	IN	C	Number of items
@@ -40,56 +39,58 @@ $?XCHS2:
 	JR	NZ,$?XCHS1	; Jump until all items ordered
 $?XCHSNC:
 	RET			; Done
+	
+	ENDIF			; XCHSORT Not used...
 
-;-----	Sort files - Improved Exchange Sort Algorithm
-;	Improved version, faster: up to N-1 swaps
+;-----	Sort files - Selection Sort Algorithm
+;	Improved version of Exchange Sort, faster: up to N-1 swaps
 ;	Get minimum of remaining items, then swap if needed
 ;	IN	C	Number of items
 ;		HL	Items table
 ;		DE	Item size
 ;		HL'	Comparator address - C flag set if *IX < *IY
-XCHSORTI:
+SELSORT:
 	INC	C		; Table empty ?
 	DEC	C		;
 	RET	Z		; return if yes
 	PUSH	HL		; First item to IX
 	POP	IX		;
-$?XCHI1:			; Outer swap loop
+$?SELS1:			; Outer swap loop
 	LD	B,C		; Counter of remaining items
 	DEC	B		; Scanner of remaining item
-	JR	Z,$?XCHIXT	; Exit if no remaining item
+	JR	Z,$?SELSXT	; Exit if no remaining item
 	DEC	B
-	JR	Z,$?XCHINC	; Jump if only 1 remaining item
+	JR	Z,$?SELSNC	; Jump if only 1 remaining item
 
 	PUSH	IX		; Save remaining item
 
 	ADD	IX,DE		; *IX = First minimum candidate
 	PUSH	IX		;
 	POP	IY		;
-$?XCHI2:			; Inner Minimum scan loop
+$?SELS2:			; Inner Minimum scan loop
 	ADD	IY,DE		; *IY Next min candidate
 	CALL	COMPIXIY	; Test if *IX < *IY
-	JR	C,$?XCHI3	; Jump if yes
+	JR	C,$?SELS3	; Jump if yes
 
 	PUSH	IY		; New minimum candidate
 	POP	IX		; to IX
 
-$?XCHI3:
-	DJNZ	$?XCHI2		; Next remaining item to scan
+$?SELS3:
+	DJNZ	$?SELS2		; Next remaining item to scan
 	PUSH	IX		; Minimum of remaining items
 	POP	IY		; to IY
 
 	POP	IX		; Restore remaining item
 
-$?XCHINC:
+$?SELSNC:
 	CALL	COMPIXIY	; Test if *IX < *IY
 	CALL	NC,SWAPIXIY	; Swap items if not
 
 	ADD	IX,DE		; Next item to check
 	DEC	C		;
-	JR	NZ,$?XCHI1	; Jump until all items ordered
+	JR	NZ,$?SELS1	; Jump until all items ordered
 
-$?XCHIXT:
+$?SELSXT:
 	RET			; Done
 
 ;-----	Compare items *IX and *IY

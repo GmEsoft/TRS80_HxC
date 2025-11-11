@@ -178,7 +178,7 @@ BDOSELX:			; DIR normal exit
 	LD	DE,FILENT$	; sort entry size
 	INC	B		; More than 255 files ?
 	DEC	B		;
-	CALL	Z,XCHSORTI	; If not, do Improved Exchange Sort
+	CALL	Z,SELSORT	; If not, do Selection Sort
 	EXX			; Back to main reg set
 	POP	BC		; S+1: Number of files in array
 DOSELEXIT:
